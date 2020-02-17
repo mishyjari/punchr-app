@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div.punchr
+    form(method='POST' action='')
+      div.form-group
+        label(for='pin') Enter your PIN:
+        br
+        textarea#pin.form-control(type='text' name='pin' rows='1' cols='6' maxlength='4')
+        br
+      button.btn.btn-primary(type='submit') Submit Punch
+    if errors
+      ul
+        for error in errors
+          li != error.msg
+  div.active_users
+    h5 Active Punches:
+      p List all open punches here

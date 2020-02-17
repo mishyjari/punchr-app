@@ -1,0 +1,9 @@
+extends layout
+block content
+  div.user_list
+    h4= memo
+    h3 All Users
+      ul
+        each user in list_users
+          li
+            a(href=user.url) #{user.first_name} #{user.last_name}
