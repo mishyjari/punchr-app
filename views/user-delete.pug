@@ -1,7 +1,9 @@
 extends layout
 block content
   h4 Delete User
+  p= id
   p Really delete #{first_name} #{last_name}? Note: this can not be undone.
   form(method='POST' action='')
-    input#userid.form-control(type='hidden', name='userid', required='true' value=id )
-  button.btn.btn-primary(type='submit') Delete User
+    div.form-group
+      input#userid.form-control(type='hidden', name='id', required='true', value=id )
+    button.btn.btn-primary(type='submit') Delete User

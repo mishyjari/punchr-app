@@ -93,14 +93,14 @@ exports.user_delete_get = function(req,res,next){
 exports.user_delete_post = function(req,res,next) {
         async.parallel({
                 user: function(cb) {
-                        User.findById(req.body.userid)
+                        User.findById(req.body.id)
                         .exec(cb)
                 },
         }, function(err, results) {
                 if (err) { return next(err); }
-		User.findByIdAndRemove(req.body.userid, function deleteUser(err) {
+		User.findByIdAndRemove(req.body.id, function deleteUser(err) {
 			if (err) { return next(err); }
-			res.render('user-list', { memo: "user deleted" })
+			res.redirect('/users/list')
 		});
 	});
 }

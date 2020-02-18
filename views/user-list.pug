@@ -7,3 +7,5 @@ block content
         each user in list_users
           li
             a(href=user.url) #{user.first_name} #{user.last_name}
+        else
+          li No Users!
