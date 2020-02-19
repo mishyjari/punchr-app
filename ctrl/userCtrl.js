@@ -1,5 +1,6 @@
 const async = require('async');
 const User = require('../models/userModel');
+const Punchr = require('../models/punchrModel');
 
 // GET New User Form
 exports.new_user_get = function(req,res,next) {
@@ -47,7 +48,7 @@ exports.user_details = function(req,res,next) {
         	        phone: results.user.phone, 
 	                email: results.user.email, 
         	        pin: results.user.pin,
-			id: results.user.id 
+			id: results.user.id,
 	         });
 	});
 };
@@ -62,15 +63,31 @@ exports.user_edit_get = function(req,res,next) {
         }, function(err, results) {
                 if (err) { return next(err); }
                 res.render('user-edit', {
+                        name: results.user.name,
                         first_name: results.user.first_name,
                         last_name: results.user.last_name,
+                        phone: results.user.phone,
+                        email: results.user.email,
+                        pin: results.user.pin,
+                        id: results.user.id
                  });
 	});
 };
 
 // POST Edit User Info
 exports.user_edit_post = function(req,res,next) {
-	res.send('edit user POST')
+	const user = new User({
+		first_name: req.body.first_name,
+		last_name: req.body.last_name,
+		phone: req.body.phone,
+		email: req.body.email,
+		pin: req.body.pin,
+		_id: req.params.id
+	});
+	User.findByIdAndUpdate(req.params.id, user, {}, function(err,updated) {
+		if(err) { return next(err) }
+		res.redirect(updated.url);
+	});
 };
 
 // GET Delete User form
@@ -105,3 +122,4 @@ exports.user_delete_post = function(req,res,next) {
 		});
 	});
 }
+

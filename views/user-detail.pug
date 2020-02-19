@@ -1,11 +1,8 @@
 extends layout
 block content
   div.user_detail
-    p= name
-    p= first_name
-    p= last_name
-    p= email
-    p= phone
-    p= pin
-    p= id
+    h4= name
+    p User Pin: #{pin}
+    p Phone: #{phone}
+    p Email: #{email}
     a(href='/users/details/' + id + '/edit') Edit User

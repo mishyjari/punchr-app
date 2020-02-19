@@ -22,6 +22,9 @@ router.get('/details/:id', user.user_details);
 /* Display User Edit Info on GET */
 router.get('/details/:id/edit', user.user_edit_get);
 
+/* Handle POST for edit user */
+router.post('/details/:id/edit', user.user_edit_post);
+
 /* Display User Delete confirmation page on GET */
 router.get('/details/:id/delete', user.user_delete_get);
 

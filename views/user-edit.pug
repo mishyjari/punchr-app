@@ -1,5 +1,25 @@
 extends layout
 block content
   h3 Edit User
-  p #{first_name} #{last_name}
-  a(href='delete') Delete User
+  h4= name
+  div.edit_user_form
+    form(method='POST' action='')
+      div.form-group
+        label(for='first_name') First Name: 
+        input#first_name.form-control(type='text' name='first_name' value=first_name)
+        br
+        label(for='last_name') Last Name:
+        input#last_name.form-control(type='text' name='last_name' value=last_name)
+        br
+        label(for='phone') Phone Number:
+        input#phone.form-control(type='text' name='phone' value=phone)
+        br
+        label(for='email') Email:
+        input#email.form-control(type='text' name='email' value=email)
+        br
+        label(for='pin') User Pin:
+        input#pin.form-control(type='text' name='pin' value=pin)
+        br
+      button.btn.btn-primary(type='submit') Submit
+  div#delete_user_button
+    a(href='delete') Delete User

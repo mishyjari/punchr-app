@@ -2,9 +2,7 @@ var express = require('express');
 var router = express.Router();
 var punchr = require('../ctrl/punchrCtrl.js');
 
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+router.get('/', punchr.punchr_main);
 
 // GET Requests for Log Page
 router.get('/log', punchr.log_get);

@@ -15,4 +15,11 @@ block content
           li != error.msg
   div.active_users
     h5 Active Punches:
-      p List all open punches here
+      ul
+        each entry in log
+          if entry.active
+            div#active_punch_display
+              h5
+                a(href=entry.url) #{entry.pin}
+              p Shift opened at: #{entry.start.toTimeString()}
+
