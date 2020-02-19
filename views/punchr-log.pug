@@ -4,6 +4,15 @@ block content
   h4 Punchr log
   ul
     each entry in log
-      li= pin
+      li
+        a(href=entry.url) Details
+      li User Pin: #{entry.pin}
+      li Start Time: #{entry.start}
+      if entry.active
+        li= entry.active
+      else
+        li End Time: #{entry.end}
+        li total time: #{entry.hours}
+      
     else
       li Log Empty

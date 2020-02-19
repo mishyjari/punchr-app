@@ -40,7 +40,8 @@ exports.user_details = function(req,res,next) {
 		},
 	}, function(err, results) {
 		if (err) { return next(err); }
-		res.render('user-detail', { 
+		res.render('user-detail', {
+			name: results.user.name,
                 	first_name: results.user.first_name, 
 	                last_name: results.user.last_name, 
         	        phone: results.user.phone, 

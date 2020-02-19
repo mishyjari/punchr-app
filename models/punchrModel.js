@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./userModel');
+const async = require('async');
 
 const PunchrSchema = new Schema({
 	pin: {
@@ -17,34 +19,49 @@ const PunchrSchema = new Schema({
 		type: Date,
 		default: null
 	},
+	active: {
+		type: Boolean,
+		default: true
+	}
 });
 
 // Virtual for Punchr url instance
 PunchrSchema
 .virtual('url')
-.get(function() { return '/blog/posts/' + this.id; });
+.get(function() { return '/punchr/log/' + this.id; });
 
-// Virtual to get user's name
+// Virtual to geti user's name
+
 PunchrSchema
-.virtual('name')
-.get(function() { return 'Gonna need to access the user db info for this one'; });
-
+.virtual('user_name', { 
+	ref: 'User',
+	localField: 'pin',
+	foreignField: 'pin',
+	justOne: true
+	})
+.get(function() {
+	User.findOne({pin: '2112'}).populate('user_name')
+	.exec(function(err,res) {
+		return res.user_name;
+	});
+});
+	
 // Virutal to return wheter or not shift is currently active as a boolean
-PunchrSchema
+/*PunchrSchema
 .virtual('active')
 .get(function() {
-	if (this.end) { return true }
-	else return false;
+	if (this.end) { return false }
+	else return "shift is active";
 });
-
+*/
 // Virtual to get total hours of shift
 PunchrSchema
 .virtual('hours')
 .get(function() {
 	if ( this.end )
-		{ return this.end.getTime() - this.start.getTime() }	
-	else
-		{ return Date.getTime() - this.start.getTime() }
+		{ return Math.floor((this.end.getTime() - this.start.getTime()) / (60*60*1000)*100)/100 }	
+//	else
+//		{ return Math.floor((Date.now().getTime() - this.start.getTime()) / (60*60*1000)*100)/100 }
 });
 
 // Export Module
