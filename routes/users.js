@@ -31,4 +31,19 @@ router.get('/details/:id/delete', user.user_delete_get);
 /* Handle POST for delete user */
 router.post('/details/:id/delete', user.user_delete_post);
 
+/* Hanle Register User POST */
+//router.post('/register', user.user_register_post);
+
+/* GET login page */
+router.get('/login', user.user_login_get);
+
+/* Handle Login POST */ 
+router.post('/login', user.user_login_post);
+
+/* Handle Dump GET */
+router.get('/dump', user.user_dump_get);
+
+/* GET Protected Page */
+router.get('protected', user.protected_get);
+
 module.exports = router;

@@ -23,6 +23,7 @@ const UserSchema = new Schema({
 	phone: { type: String, required: true }, // Add some phone verification here??
 	email: { type: String }, // Add email verification here??
 	active: { type: Boolean, default: true },
+	password: { type: String, required: true }
 });
 
 // Virtual for user's full name
